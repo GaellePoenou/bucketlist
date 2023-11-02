@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}{{parent()}} | Add{% endblock %}
+
+ {% block body %}
+<h2>Add your wishes</h2>
+{{ form_start(wishForm) }}
+<div class="col-6">
+<div class="form-group">
+    {{ form_label(wishForm.title) }}
+        {{ form_widget(wishForm.title, {'attr': {'class': 'form-control'}}) }}
+    </div>
+     <div class="form-group">
+     {{ form_label(wishForm.description) }}
+        {{ form_widget(wishForm.description, {'attr': {'class': 'form-control'}}) }}
+    </div>
+     <div class="form-group">
+     {{ form_label(wishForm.author) }}
+        {{ form_widget(wishForm.author, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    </div>
+<button type="submit" class="btn btn-primary">Let's Go!</button>
+{{ form_end(wishForm) }}
+
+
+
+  
+
+
+{% endblock %}
