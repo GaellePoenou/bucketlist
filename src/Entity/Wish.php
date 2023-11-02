@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\WishRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: WishRepository::class)]
 class Wish
@@ -14,7 +15,14 @@ class Wish
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "The title cannot be longer than {{ limit }} characters"
+     * @Assert\NotBlank(message = "The title cannot be blank")
+     * )
+     */
     private ?string $title = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -28,6 +36,10 @@ class Wish
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateCreated = null;
+
+    #[ORM\ManyToOne(inversedBy: 'wish')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     public function getId(): ?int
     {
@@ -90,6 +102,18 @@ class Wish
     public function setDateCreated(\DateTimeInterface $dateCreated): static
     {
         $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }

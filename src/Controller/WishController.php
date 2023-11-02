@@ -45,12 +45,17 @@ class WishController extends AbstractController
   public function add(Request $request, EntityManagerInterface $entityManager): Response
   {
     $wish = new Wish();
+    $wish->setDateCreated(new \DateTime());
+    $wish->setIsPublished(true);
+
     $wishForm = $this->createForm(WishType::class, $wish);
     $wishForm->handleRequest($request);
     if ($wishForm->isSubmitted() && $wishForm->isValid()) {
       $entityManager->persist($wish);
       $entityManager->flush();
-      return $this->redirectToRoute('wish_list');
+
+      $this->addFlash('success', 'Idea successfully added!');
+      return $this->redirectToRoute('wish_detail', ['id' => $wish->getId()]);
     }
     return $this->render('wish/add.html.twig', ['wishForm' => $wishForm->createView()]);
   }
