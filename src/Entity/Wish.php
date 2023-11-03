@@ -20,6 +20,7 @@ class Wish
      * @Assert\Length(
      *      max = 255,
      *      maxMessage = "The title cannot be longer than {{ limit }} characters"
+     * )
      * @Assert\NotBlank(message = "The title cannot be blank")
      * )
      */

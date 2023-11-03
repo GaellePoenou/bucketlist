@@ -19,6 +19,11 @@
      {{ form_label(wishForm.author) }}
         {{ form_widget(wishForm.author, {'attr': {'class': 'form-control'}}) }}
     </div>
+    <div class="form-group">
+     
+    {{ form_label(wishForm.category) }}
+    {{ form_widget(wishForm.category, {'attr': {'class': 'form-control'}}) }}
+</div>
     </div>
 <button type="submit" class="btn btn-primary">Let's Go!</button>
 {{ form_end(wishForm) }}

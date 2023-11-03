@@ -14,7 +14,7 @@
   <div class="card-body">
     <h5 class="card-title">{{wish.title}}</h5>
     <p class="card-text">Written by {{wish.author}}</p>
-    <a href="#" class="btn btn-primary">Details</a>
+    <a href="{{ path('wish_detail', {'id': wish.id}) }}" class="btn btn-primary">Details</a>
   </div>
 </div>
 
