@@ -5,5 +5,8 @@
 
  {% block body %}
 <h1>Page home</h1>
+{% if app.user is not null %}
+    {{ app.user.username }}
+{% endif %}
 {% endblock %}
 
